@@ -1,6 +1,7 @@
 import { gameRepository } from "../repositories/game"
 import {PlayerEntity } from "../domain"
 import cuid from 'cuid'
+import { left, right } from "@/shared/lib/either"
 export  async function createGame(player: PlayerEntity) {
     const playerGames = await gameRepository.gamesList({
         players: {some: {id:player.id}},
@@ -10,10 +11,7 @@ export  async function createGame(player: PlayerEntity) {
     const isGameInIdleStatus = playerGames.some((game) => game.status === 'idle' && game.creator.id === player.id,
    ) 
    if (isGameInIdleStatus)    {
-      return {
-        type: 'error',
-        error: 'can-create-only-one-game'
-    } as const 
+     return left('can-create-only-one-game' as const)
 }
     const createdGame = await gameRepository.createGame({
         id: cuid(),
@@ -22,5 +20,6 @@ export  async function createGame(player: PlayerEntity) {
        }
     )
 
-    return createdGame 
+    return  right(createdGame)
+    
 }

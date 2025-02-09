@@ -15,30 +15,30 @@ async function main() {
       passwordHash: "$2b$10$a4u7r0h39i58jX1x3o2k5O4e69a7c3897798998",
     },
   })
-  await prisma.game.create({
-    data: {
-      field: Array(9).fill(null),
-      status: 'idle',
-      players: {
-        connect: {
-          id: user.id,
+  // await prisma.game.create({
+  //   data: {
+  //     field: Array(9).fill(null),
+  //     status: 'idle',
+  //     players: {
+  //       connect: {
+  //         id: user.id,
 
-        }
-      }
-    },
-  })
-  await prisma.game.create({
-    data: {
-      field: Array(9).fill(null),
-      status: 'idle',
-      players: {
-        connect: {
-          id: user2.id,
+  //       }
+  //     }
+  //   },
+  // })
+  // await prisma.game.create({
+  //   data: {
+  //     field: Array(9).fill(null),
+  //     status: 'idle',
+  //     players: {
+  //       connect: {
+  //         id: user2.id,
 
-        }
-      }
-    },
-  })
+  //       }
+  //     }
+  //   },
+  // })
 }
 main()
   .then(async () => {
