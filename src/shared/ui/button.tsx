@@ -43,18 +43,36 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false,error: result,children, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      error: result,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      >{children}
-      {result && matchEither(result, {
-        right:  () => null,
-        left: (e) => <div className="absolute left-0 top-[calc(100%_+_4px)] text-primary">{e}</div>
-      })}</Comp>
+      >
+        {children}
+        {result &&
+          matchEither(result, {
+            right: () => null,
+            left: (e) => (
+              <div className="absolute left-0 top-[calc(100%_+_4px)] text-primary">
+                {e}
+              </div>
+            ),
+          })}
+      </Comp>
     );
   },
 );

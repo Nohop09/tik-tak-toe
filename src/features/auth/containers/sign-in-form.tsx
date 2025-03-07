@@ -7,8 +7,8 @@ import { SubmitButton } from "../ui/submit-button";
 import { right } from "@/shared/lib/either";
 import { BottomLink } from "../ui/link";
 import { ErrorMessage } from "../ui/error-message";
-import { signUpAction } from "../actions/sign-up";
 import { signInAction } from "../actions/sign-in";
+import { routes } from "@/kernel/routes";
 export function SignInForm() {
   const [formState, action, isPending] = useActionState(
     signInAction,
@@ -26,7 +26,7 @@ export function SignInForm() {
         <BottomLink
           text="Don`t have an account?"
           linkText="Sign up"
-          url="/sign-up"
+          url={routes.signUp()}
         />
       }
     />
